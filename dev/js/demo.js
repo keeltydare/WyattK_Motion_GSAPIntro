@@ -6,7 +6,9 @@ var redBox = $('.red-box');
 var blueBox = $('.blue-box');
 var orangeBox = $('.orange-box');
 
-var boxArray = [redBox, blueBox, orangeBox];
+//var boxArray = [redBox, blueBox, orangeBox];
+var mainTL = gsap.timeline();
+var tl = gsap.timeline();
 
 // only here to make codeKit be quiet!
 console.log(gsap);
@@ -64,7 +66,45 @@ $(document).ready(function(){
     //stagger, theres also a welside link
     //gsap.to(boxArray ,{duration:0.5, x:300, opacity:0.5, stagger:1});
     //gsap.to(boxArray ,{duration:0.5, x:300, opacity:0.5, stagger:{each:0.5}});
-    gsap.to(boxArray ,{duration:0.5, x:300, opacity:0.5, stagger:{amount:1, from:"random"}});
+    //gsap.to(boxArray ,{duration:0.5, x:300, opacity:0.5, stagger:{amount:1, from:"random"}});
+
+
+    //Timeline
+    //tl.to(redBox ,{duration:2 , x:400, ease:"expo.out"});
+    //tl.to(blueBox ,{duration:2 , x:400, ease:"expo.out"});
+    //tl.to(orangeBox ,{duration:2 , x:400, ease:"expo.out"});
+
+//relative postioning
+    //tl.to(redBox ,{duration:1 , x:400, ease:"none"})
+     // .to(blueBox ,{duration:2 , x:400, ease:"none"}, "-=0.5")
+     // .to(orangeBox ,{duration:2 , x:400, ease:"none"}, "<=0.25")
+
+      //Labels
+      //tl.to(redBox ,{duration:1 , x:400, ease:"none"})
+      //.addLabel("startbluebox", 0)
+      //.to(blueBox ,{duration:2 , x:400, ease:"none"}, "startbluebox")
+      //.to(orangeBox ,{duration:2 , x:400, ease:"none"}, "startbluebox+=0.5")
+
+      //Nesting
+
+
+     
+
+      function aniBox(){
+          var tl = gsap.timeline();
+
+      tl.to(redBox ,{duration:1 , x:400, ease:"none"})
+      .addLabel("startbluebox")
+      .to(blueBox ,{duration:2 , rotation: "180deg", x:400, ease:"none"}, "startbluebox")
+      .to(orangeBox ,{duration:2 , x:400, ease:"none"}, "startbluebox+=0.5")
+       ;//timeline END
+
+       return tl;
+      }
+
+      //add main timeline
+      mainTL.add(aniBox())
+      mainTL.timeScale(2);
 
 
 });
